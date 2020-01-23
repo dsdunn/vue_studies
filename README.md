@@ -29,13 +29,13 @@ However, when it comes to the details, it is better to focus on spacing/alignmen
 
 First, make sure Docker is installed and running.
 
-Once you have downloaded and unzipped this repository, create the docker image by runing this command from your terminal in the unzipped directory:
+Once you have cloned this repository, create the docker image by runing this command from your terminal in the cloned directory:
 
 `docker build -t developer-sample-task . `
 
 To create and run the docker container (**replacing ONLY the capitalized words in the command**):
 
-`docker run -v \INSERT/PATH/TO/THE/CODE/DIRECTORY:/app -v /app/node_modules -p 8081:8080 --rm developer-sample-task `
+`docker run -v \INSERT/PATH/TO/THE/CLONED/DIRECTORY:/app -v /app/node_modules -p 8081:8080 --rm developer-sample-task `
 
 Ignore npm warnings for dependencies
 
