@@ -2,7 +2,7 @@
   <table>
     <tr>
       <th>
-        a study
+        {{ study.id }}
       </th>
     </tr>
   </table>

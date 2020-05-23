@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <Study />
+    <Study v-for="study in studies" :key="study.id" :study="study" />
   </div>
 </template>
 

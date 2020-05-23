@@ -1,16 +1,38 @@
 <template>
   <div id="app">
-    <StudyContainer />
+    <StudyList :studies="studies" />
   </div>
 </template>
 
 <script>
-import StudyContainer from './components/StudyContainer.vue'
+import StudyList from './components/StudyList.vue'
 
 export default {
   name: 'app',
   components: {
-    StudyContainer
+    StudyList
+  },
+  data: function() {
+    return {
+      studies: []
+    }
+  },
+  mounted() {
+    this.fetchStudies();
+  },
+  methods: {
+    fetchStudies: async function () {
+      let response = await fetch('https://www.cxsurveys.com/devtest/getStudyData.php');
+      let result = await response.json();
+      
+      if (result) {
+        let { studyData } = result;
+
+        this.studies = studyData;
+      }
+
+    }
+
   }
 }
 </script>
