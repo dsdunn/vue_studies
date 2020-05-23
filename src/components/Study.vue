@@ -13,8 +13,8 @@
         {{ study.numCompletes }}
       </td>
       <td>
-        <button>Add Complete</button>
-        <font-awesome-icon icon="trash-alt" />
+        <button @click="handleChange('add_complete', study.id)">Add Complete</button>
+        <font-awesome-icon icon="trash-alt" @click="deleteStudy(study.id)" />
       </td>
     </tr>
 </template>
@@ -33,6 +33,12 @@
         let year = jsDate.getFullYear();
 
         return `${month}/${day}/${year}`
+      },
+      handleChange(changeType, id) {
+        this.$emit('update_study', {changeType, id})
+      },
+      deleteStudy(id) {
+        this.$emit('delete_study', id);
       }
     }
   }

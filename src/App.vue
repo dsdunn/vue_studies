@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <StudyList :studies="studies" />
+    <StudyList :studies="studies" @update_study="updateStudy" @delete_study="addOrDeleteStudy" />
     <button @click="addOrDeleteStudy(null)">+ Add Study</button>
   </div>
 </template>
@@ -32,9 +32,9 @@ export default {
         this.studies = studyData;
       }
     },
-    addOrDeleteStudy: function(event) {
-      if (event && event.id) {
-        let index = this.studies.findIndex(study => study.id === event.id);
+    addOrDeleteStudy: function(id) {
+      if (id) {
+        let index = this.studies.findIndex(study => study.id === id);
 
         this.studies.splice(index, 1);
       } else {
@@ -47,6 +47,19 @@ export default {
           creationDate,
           numCompletes: 0
         })
+      }
+    },
+    updateStudy: function(update = {}) {
+      let { changeType, id, newName } = update;
+      let study = this.studies.find(study => study.id === id);
+
+      switch (changeType) {
+        case 'add_complete':
+          study.numCompletes++;
+          break;
+        case 'update_name':
+          study.studyName = newName
+          break;
       }
     }
   }

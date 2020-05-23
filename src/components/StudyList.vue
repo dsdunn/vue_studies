@@ -7,7 +7,7 @@
       <th>Completes</th>
       <th></th>
     </tr>
-    <Study v-for="study in studies" :key="study.id" :study="study" />
+    <Study v-for="study in studies" :key="study.id" :study="study" v-on="$listeners"/>
   </table>
 </template>
 
