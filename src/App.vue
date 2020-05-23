@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <StudyList :studies="studies" />
-    <button>+ Add Study</button>
+    <button @click="addOrDeleteStudy(null)">+ Add Study</button>
   </div>
 </template>
 
@@ -31,9 +31,24 @@ export default {
 
         this.studies = studyData;
       }
+    },
+    addOrDeleteStudy: function(event) {
+      if (event && event.id) {
+        let index = this.studies.findIndex(study => study.id === event.id);
 
+        this.studies.splice(index, 1);
+      } else {
+        let now = Date.now();
+        let creationDate = new Date();
+
+        this.studies.push({
+          studyName: 'New Study',
+          id: now,
+          creationDate,
+          numCompletes: 0
+        })
+      }
     }
-
   }
 }
 </script>

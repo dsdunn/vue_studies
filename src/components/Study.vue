@@ -7,7 +7,7 @@
         {{ study.id }}
       </td>
       <td>
-        {{ study.creationDate }}
+        {{ formatDate(study.creationDate) }}
       </td>
       <td>
         {{ study.numCompletes }}
@@ -24,6 +24,16 @@
     name: 'Study',
     props: {
       study: Object
+    },
+    methods: {
+      formatDate(dateString) {
+        let jsDate = new Date(dateString);
+        let day = jsDate.getDate();
+        let month = jsDate.getMonth() + 1;
+        let year = jsDate.getFullYear();
+
+        return `${month}/${day}/${year}`
+      }
     }
   }
 </script>
