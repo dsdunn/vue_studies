@@ -1,11 +1,22 @@
 <template>
-  <table>
     <tr>
-      <th>
+      <td>
+        <span>{{ study.studyName }}</span><font-awesome-icon icon="pencil-alt" />
+      </td>
+      <td>
         {{ study.id }}
-      </th>
+      </td>
+      <td>
+        {{ study.creationDate }}
+      </td>
+      <td>
+        {{ study.numCompletes }}
+      </td>
+      <td>
+        <button>Add Complete</button>
+        <font-awesome-icon icon="trash-alt" />
+      </td>
     </tr>
-  </table>
 </template>
 
 <script>
@@ -16,3 +27,6 @@
     }
   }
 </script>
+
+<style lang="scss" scoped>
+</style>

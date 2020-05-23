@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <StudyList :studies="studies" />
+    <button>+ Add Study</button>
   </div>
 </template>
 
