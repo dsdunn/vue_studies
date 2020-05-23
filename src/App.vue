@@ -51,6 +51,7 @@ export default {
     },
     updateStudy: function(update = {}) {
       let { changeType, id, newName } = update;
+      // console.log(changeType, id, value);
       let study = this.studies.find(study => study.id === id);
 
       switch (changeType) {
