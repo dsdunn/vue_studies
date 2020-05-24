@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <StudyList :studies="studies" @update_study="updateStudy" @delete_study="addOrDeleteStudy" />
-    <button @click="addOrDeleteStudy(null)">+ Add Study</button>
+    <button class="add-study-button" @click="addOrDeleteStudy(null)">+ Add Study</button>
   </div>
 </template>
 
@@ -38,12 +38,11 @@ export default {
 
         this.studies.splice(index, 1);
       } else {
-        let now = Date.now();
         let creationDate = new Date();
 
         this.studies.push({
           studyName: 'New Study',
-          id: now,
+          id: Date.now(),
           creationDate,
           numCompletes: 0
         })
@@ -51,7 +50,6 @@ export default {
     },
     updateStudy: function(update = {}) {
       let { changeType, id, newName } = update;
-      // console.log(changeType, id, value);
       let study = this.studies.find(study => study.id === id);
 
       switch (changeType) {
@@ -67,13 +65,32 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
+html {
+  background-color: #2b6890;
+}
+
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  margin: 13% 10%;
 }
+
+button.add-study-button {
+  border: none;
+  border-radius: 4px;
+  color: white;
+  background-color: #174462;
+  padding: 0.3em 1em;
+  box-shadow: 0 2px 2px gray;
+  font-size: 0.8em;
+  
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+
+
 </style>

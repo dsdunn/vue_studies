@@ -1,30 +1,30 @@
 <template>
-    <tr>
-      <td>
+    <div class="study">
+      <span class="study-name">
         <span 
-          contenteditable="isNameEditable" 
+          :contenteditable="isNameEditable" 
           ref="editableName" 
           @blur="handleChange('update_name', study.id)"
           @keypress="validateInput"
         >
           {{ study.studyName }}
         </span>
-        <font-awesome-icon icon="pencil-alt" @click="editName"/>
-      </td>
-      <td>
+        <font-awesome-icon class="icon" icon="pencil-alt" @click="editName"/>
+      </span>
+      <span>
         {{ study.id }}
-      </td>
-      <td>
+      </span>
+      <span>
         {{ formatDate(study.creationDate) }}
-      </td>
-      <td>
+      </span>
+      <span>
         {{ study.numCompletes }}
-      </td>
-      <td>
+      </span>
+      <span class="controls">
         <button @click="handleChange('add_complete', study.id)">Add Complete</button>
-        <font-awesome-icon icon="trash-alt" @click="deleteStudy(study.id)" />
-      </td>
-    </tr>
+        <font-awesome-icon class="icon" icon="trash-alt" @click="deleteStudy(study.id)" />
+      </span>
+    </div>
 </template>
 
 <script>
@@ -59,13 +59,15 @@
         this.isNameEditable = !this.isNameEditable;
 
         if (this.isNameEditable) {
-          this.$refs.editableName.focus();
           let range = new Range();
+          
+          this.$refs.editableName.focus();
 
           range.setStart(this.$refs.editableName, 0);
           range.setEnd(this.$refs.editableName, 1);
           document.getSelection().removeAllRanges();
           document.getSelection().addRange(range);
+
         }
       },
       validateInput() {
@@ -78,4 +80,41 @@
 </script>
 
 <style lang="scss" scoped>
+
+  .study-name {
+    font-size: 15px;
+    font-weight: 600;
+  }
+
+  .icon {
+    color: gray;
+    font-size: 16px;
+    margin: auto 7px;
+
+    &:hover {
+      color: lightgray;
+      cursor: pointer;
+    }
+  }
+
+  button {
+    margin-right: 15px;
+    border-radius: 4px;
+    padding: 5px;
+    color: #2b6890;
+    background: #d4d4d4;
+    box-shadow: 0 3px 3px #cccccc;
+
+    &:hover {
+      background-color: #e9e9e9;
+      cursor: pointer;
+    }
+  }
 </style>
+
+
+
+
+
+
+
