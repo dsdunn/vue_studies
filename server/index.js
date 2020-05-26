@@ -11,7 +11,7 @@ let port = process.env.PORT || 3000;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-mongo.connect('mongodb://localhost:27017', {
+mongo.connect('student:password@mongodb://db:27017', {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
