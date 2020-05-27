@@ -35,7 +35,8 @@ const StudyType = new GraphQLObjectType({
       type: GraphQLDate
     },
     numCompletes: {
-      type: GraphQLInt
+      // fails with type in because of json
+      type: GraphQLString
     }
   })
 })
@@ -77,7 +78,7 @@ const Mutation = new GraphQLObjectType({
       resolve(parent, args) {
         let study = new Study({
           studyName: args.studyName,
-          numCompletes: 0,
+          numCompletes: '0',
           creationDate: Date.now(),
         });
         return study.save();
@@ -96,7 +97,7 @@ const Mutation = new GraphQLObjectType({
         },
         numCompletes: {
           type: new GraphQLNonNull(
-            GraphQLInt)
+            GraphQLString)
         }
       },
       async resolve(parent, args) {

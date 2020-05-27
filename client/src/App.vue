@@ -7,7 +7,7 @@
 
 <script>
 import StudyList from './components/StudyList.vue';
-import { fetchData } from './api';
+import { getStudies, addStudy, deleteStudy, updateStudy } from './api';
 
 export default {
   name: 'app',
@@ -24,8 +24,7 @@ export default {
   },
   methods: {
     fetchStudies: async function () {
-      let { data } = await fetchData();
-      console.log(data);
+      let { data } = await getStudies();
       
       if (data) {
         let { studies } = data;
@@ -33,23 +32,20 @@ export default {
         this.studies = studies;
       }
     },
-    addOrDeleteStudy: function(id) {
+    addOrDeleteStudy: async function(id) {
       if (id) {
         let index = this.studies.findIndex(study => study.id === id);
 
+        deleteStudy(id);
+
         this.studies.splice(index, 1);
       } else {
-        let creationDate = new Date();
+        let { data } = await addStudy();
 
-        this.studies.push({
-          studyName: 'New Study',
-          id: Date.now(),
-          creationDate,
-          numCompletes: 0
-        })
+        this.studies.push(data.addStudy);
       }
     },
-    updateStudy: function(update = {}) {
+    updateStudy: async function(update = {}) {
       let { changeType, id, newName } = update;
       let study = this.studies.find(study => study.id === id);
 
@@ -61,6 +57,7 @@ export default {
           study.studyName = newName
           break;
       }
+      updateStudy(study);
     }
   }
 }
