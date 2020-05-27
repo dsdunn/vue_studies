@@ -1,18 +1,13 @@
 version: "3.7"
 services:
   db:
-    image: mongo:latest
+    build: ./db
     container_name: studies_db
     ports:
       - "27017:27017"
     restart: unless-stopped
-    environment: 
-      ENV MONGO_INITDB_DATABASE: studies
-      ENV MONGO_INITDB_ROOT_USERNAME: student
-      ENV MONGO_INITDB_ROOT_PASSWORD: password
     volumes:
       - ./db/data:/data/db
-      - ./db/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
   server:
     build: ./server
     container_name: studies_server
@@ -22,6 +17,12 @@ services:
       DATABASE_HOST: host.docker.internal
       DATABASE_USER: student
       DATABASE_PASSWORD: password
+    depends_on:
+      - "db"
+    restart: unless-stopped
+    volumes:
+      - ./server:/server
+      - ./server/node_modules
   client:
     build: ./client
     container_name: studies_client
@@ -32,4 +33,4 @@ services:
     restart: unless-stopped
     volumes:
       - ./client:/client
-      - /client/node_modules
+      - ./client/node_modules

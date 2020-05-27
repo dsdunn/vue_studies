@@ -6,7 +6,8 @@
 </template>
 
 <script>
-import StudyList from './components/StudyList.vue'
+import StudyList from './components/StudyList.vue';
+import { fetchData } from './api';
 
 export default {
   name: 'app',
@@ -23,13 +24,13 @@ export default {
   },
   methods: {
     fetchStudies: async function () {
-      let response = await fetch('https://www.cxsurveys.com/devtest/getStudyData.php');
-      let result = await response.json();
+      let { data } = await fetchData();
+      console.log(data);
       
-      if (result) {
-        let { studyData } = result;
+      if (data) {
+        let { studies } = data;
 
-        this.studies = studyData;
+        this.studies = studies;
       }
     },
     addOrDeleteStudy: function(id) {

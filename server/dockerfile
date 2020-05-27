@@ -16,4 +16,4 @@ COPY . .
 
 
 # start server
-CMD ["npm", "run", "start"]
+CMD node_modules/nodemon/bin/nodemon.js index.js
