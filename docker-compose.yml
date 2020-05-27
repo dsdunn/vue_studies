@@ -11,12 +11,13 @@ services:
       ENV MONGO_INITDB_ROOT_USERNAME: student
       ENV MONGO_INITDB_ROOT_PASSWORD: password
     volumes:
+      - ./db/data:/data/db
       - ./db/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
   server:
     build: ./server
     container_name: studies_server
     ports:
-      - "3001:3000"
+      - "3000:3000"
     environment:
       DATABASE_HOST: host.docker.internal
       DATABASE_USER: student
@@ -25,7 +26,7 @@ services:
     build: ./client
     container_name: studies_client
     ports: 
-      - "8081:8080"
+      - "8080:8080"
     depends_on:
       - "server"
     restart: unless-stopped

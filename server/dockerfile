@@ -5,13 +5,15 @@ FROM node:12.2.0-alpine
 WORKDIR /server
 
 # add `/server/node_modules/.bin` to $PATH
-ENV PATH /server/node_modules/.bin:$PATH
+#ENV PATH /server/node_modules/.bin:$PATH
 
 # install and cache app dependencies
-COPY package.json package.json
+COPY package*.json ./
+
 RUN npm install
 
-COPY . /server/
+COPY . .
+
 
 # start server
 CMD ["npm", "run", "start"]
