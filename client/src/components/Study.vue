@@ -11,7 +11,7 @@
         </span>
         <font-awesome-icon class="icon" icon="pencil-alt" @click="editName"/>
       </span>
-      <span>
+      <span class="study-id">
         {{ study.id }}
       </span>
       <span>
@@ -84,6 +84,11 @@
   .study-name {
     font-size: 15px;
     font-weight: 600;
+  }
+
+  .study-id {
+    overflow-wrap: break-word;
+    padding-right: 5px;
   }
 
   .icon {
